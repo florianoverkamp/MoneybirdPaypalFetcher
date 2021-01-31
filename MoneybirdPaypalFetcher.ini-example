@@ -1,0 +1,24 @@
+#
+# MoneybirdPaypalFetcher.ini
+#
+[general]
+quiet		= false
+
+[paypal]
+# Sandbox: https://api-m.sandbox.paypal.com
+# Live: https://api-m.paypal.com
+endpoint	= https://api-m.sandbox.paypal.com
+# Your app's client-id and secret
+clientid	= 
+secret		= 
+
+[moneybird]
+endpoint	= https://moneybird.com
+clientid	= 
+secret		= 
+token		= 
+# Your company
+adminid		= 123
+# Enter the identifier, not the pretty name!
+finacct		= paypal@mydomain.nl
+
