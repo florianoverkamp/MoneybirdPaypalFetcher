@@ -76,11 +76,19 @@ def pp_gettransactions(token, start_date, end_date):
                     message = message + " " + pp_transaction_info["custom_field"]
                 # Register the original currency and value
                 message = message + " (" + pp_transaction_info["transaction_amount"]["currency_code"] + " " + pp_transaction_info["transaction_amount"]["value"] + ")"
-                transactions[tr_id]["message"] = message
                 if (pp_transaction_info["transaction_amount"]["currency_code"] == "EUR"):
                     transactions[tr_id]["eur_amount"] = float(pp_transaction_info["transaction_amount"]["value"])
                 if (pp_transaction_info["transaction_amount"]["currency_code"] == "USD"):
                     transactions[tr_id]["usd_amount"] = float(pp_transaction_info["transaction_amount"]["value"])
+                # Mark transaction updates explicitly
+                if (pp_transaction_info["transaction_updated_date"] != pp_transaction_info["transaction_initiation_date"]):
+                    message = message + " - TRANSACTION UPDATE MARKER"
+                    transactions[tr_id]["usd_amount"] = 0
+                    transactions[tr_id]["eur_amount"] = 0
+                    transactions[tr_id]["date"] = pp_transaction_info["transaction_updated_date"]
+                    print("WARNING: Transaction got updated, please check if we did the right thing!")
+                # Push message
+                transactions[tr_id]["message"] = message
 
                 # If fee_amount is set, then create an additional transaction line
                 if("fee_amount" in pp_transaction_info):
