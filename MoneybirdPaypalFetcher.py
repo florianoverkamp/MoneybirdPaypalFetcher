@@ -123,7 +123,7 @@ def pp_gettransactions(token, start_date, end_date):
                 transactions[tr_id] = {}
                 transactions[tr_id]["date"] = pp_transaction_info["transaction_initiation_date"]
                 message = "Bank to Paypal"
-                message = message + " " + pp_transaction_info["bank_reference_id"]
+                message = message + " " + pp_transaction_info.get("bank_reference_id", "(no ref)")
                 # Register the original currency and value
                 message = message + " (" + pp_transaction_info["transaction_amount"]["currency_code"] + " " + pp_transaction_info["transaction_amount"]["value"] + ")"
                 transactions[tr_id]["message"] = message
