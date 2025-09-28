@@ -55,6 +55,9 @@ def pp_gettransactions(token, start_date, end_date):
     if response.status_code == requests.codes.ok:
         pp_transactions = response.json()
         transactions = {}
+        if (pp_transactions.get("transaction_details") is None):
+            print("INFO: Found " + str(len(transactions)) + " transactions")
+            return transactions
         for pp_transaction in pp_transactions["transaction_details"]:
             # Breaking down the transaction log. Each transaction consists of:
             pp_transaction_info = pp_transaction["transaction_info"]
